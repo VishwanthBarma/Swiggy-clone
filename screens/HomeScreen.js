@@ -1,4 +1,11 @@
-import { View, Text, Image, TextInput, SafeAreaView } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  TextInput,
+  SafeAreaView,
+  ScrollView,
+} from "react-native";
 import React, { useLayoutEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
 import {
@@ -7,6 +14,8 @@ import {
   SearchIcon,
   AdjustmentsIcon,
 } from "react-native-heroicons/outline";
+import Catagories from "../components/Catagories/Catagories";
+import Featured from "../components/Featured/Featured";
 
 const HomeScreen = () => {
   return (
@@ -41,6 +50,31 @@ const HomeScreen = () => {
         </View>
         <AdjustmentsIcon color="#CA4E79" />
       </View>
+
+      {/* Body */}
+
+      <ScrollView className="bg-gray-100 mt-2 mb-24">
+        {/* Categories */}
+        <Catagories />
+
+        <Featured
+          id="1"
+          title="Featured"
+          description="Your featured food items"
+        />
+        <Featured
+          id="2"
+          title="Tasty Discounts"
+          description="Everyone's favorite food"
+        />
+        <Featured
+          id="3"
+          title="Offers near you!"
+          description="Support your friends with offers"
+        />
+
+        {/* Featured Contents */}
+      </ScrollView>
     </SafeAreaView>
   );
 };
