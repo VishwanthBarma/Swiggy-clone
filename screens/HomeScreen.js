@@ -57,6 +57,8 @@ const HomeScreen = () => {
         {/* Categories */}
         <Catagories />
 
+        {/* Featured Contents */}
+
         <Featured
           id="1"
           title="Featured"
@@ -72,8 +74,6 @@ const HomeScreen = () => {
           title="Offers near you!"
           description="Support your friends with offers"
         />
-
-        {/* Featured Contents */}
       </ScrollView>
     </SafeAreaView>
   );
