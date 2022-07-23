@@ -6,7 +6,7 @@ import {
   SafeAreaView,
   ScrollView,
 } from "react-native";
-import React, { useLayoutEffect } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import {
   UserIcon,
@@ -16,8 +16,31 @@ import {
 } from "react-native-heroicons/outline";
 import Catagories from "../components/Catagories/Catagories";
 import Featured from "../components/Featured/Featured";
+import sanityClient from "../sanity";
 
 const HomeScreen = () => {
+  const [featuredCategories, setFeaturedCategories] = useState([]);
+
+  useEffect(() => {
+    sanityClient
+      .fetch(
+        `
+      *[_type == "featured"] {
+        ...,
+        restaurant[]->{
+          ...,
+          dishes[]->{
+            ...,
+          }
+        }
+      }
+      `
+      )
+      .then((data) => {
+        setFeaturedCategories(data);
+      });
+  }, []);
+
   return (
     <SafeAreaView className="bg-white">
       <View className="flex-row space-x-2 items-center pb-4 mx-3">
@@ -59,21 +82,14 @@ const HomeScreen = () => {
 
         {/* Featured Contents */}
 
-        <Featured
-          id="1"
-          title="Featured"
-          description="Your featured food items"
-        />
-        <Featured
-          id="2"
-          title="Tasty Discounts"
-          description="Everyone's favorite food"
-        />
-        <Featured
-          id="3"
-          title="Offers near you!"
-          description="Support your friends with offers"
-        />
+        {featuredCategories?.map((category) => (
+          <Featured
+            key={category._id}
+            id={category._id}
+            title={category.name}
+            description={category.short_description}
+          />
+        ))}
       </ScrollView>
     </SafeAreaView>
   );
