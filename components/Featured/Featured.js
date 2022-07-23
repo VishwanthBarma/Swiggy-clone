@@ -29,8 +29,6 @@ const Featured = ({ id, title, description }) => {
       });
   }, []);
 
-  console.log(restaurants);
-
   return (
     <View>
       <View className="flex-row items-center justify-between mx-3 mt-4">
@@ -44,44 +42,21 @@ const Featured = ({ id, title, description }) => {
         showsHorizontalScrollIndicator={false}
         className="mx-3 pt-3"
       >
-        <FeaturedCard
-          id="1"
-          imgUrl="https://assets.epicurious.com/photos/5732526f1877f76a0e20831c/1:1/w_2560%2Cc_limit/EP_05102016_PeruvianStyleRoastChicken_recipe_.jpg"
-          title="Chicken"
-          rating={4.5}
-          genre="Non-veg"
-          address="Narsingi kokapet"
-          short_description="Chicken Biryani of the year"
-          dishes={[]}
-          long={20}
-          lat={0}
-        />
-
-        <FeaturedCard
-          id="1"
-          imgUrl="https://assets.epicurious.com/photos/5732526f1877f76a0e20831c/1:1/w_2560%2Cc_limit/EP_05102016_PeruvianStyleRoastChicken_recipe_.jpg"
-          title="Chicken"
-          rating={4.5}
-          genre="Non-veg"
-          address="Narsingi kokapet"
-          short_description="Chicken Biryani of the year"
-          dishes={[]}
-          long={20}
-          lat={0}
-        />
-
-        <FeaturedCard
-          id="1"
-          imgUrl="https://assets.epicurious.com/photos/5732526f1877f76a0e20831c/1:1/w_2560%2Cc_limit/EP_05102016_PeruvianStyleRoastChicken_recipe_.jpg"
-          title="Chicken"
-          rating={4.5}
-          genre="Non-veg"
-          address="Narsingi kokapet"
-          short_description="Chicken Biryani of the year"
-          dishes={[]}
-          long={20}
-          lat={0}
-        />
+        {restaurants?.map((restaurant) => (
+          <FeaturedCard
+            key={restaurant._id}
+            id={restaurant._id}
+            imgUrl={restaurant.image}
+            title={restaurant.name}
+            rating={restaurant.rating}
+            genre={restaurant.type?.name}
+            address={restaurant.address}
+            short_description={restaurant.short_description}
+            dishes={restaurant.dishes}
+            long={restaurant.long}
+            lat={restaurant.lat}
+          />
+        ))}
       </ScrollView>
     </View>
   );
