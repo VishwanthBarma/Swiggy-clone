@@ -9,7 +9,7 @@ const DishCard = ({ id, name, description, image, price }) => {
     <>
       <TouchableOpacity
         onPress={() => setIsPressed(!isPressed)}
-        className={`bg-white p-4 border border-gray-200 ${
+        className={`bg-white p-4 border border-gray-300 ${
           isPressed && "border-b-0"
         }`}
       >
@@ -36,7 +36,7 @@ const DishCard = ({ id, name, description, image, price }) => {
             <TouchableOpacity>
               <MinusCircleIcon size={35} color="#00b6bd" />
             </TouchableOpacity>
-            <Text>0</Text>
+            <Text className="font-semibold">0</Text>
             <TouchableOpacity>
               <PlusCircleIcon size={35} color={"#00b6bd"} />
             </TouchableOpacity>
